@@ -1,2 +1,7 @@
-Django==3.0.7
-psycopg2-binary==2.8.5
+Django>=3.0.7
+psycopg2-binary>=2.8.5
+djangorestframework>=3.11.0
+Pygments>=2.6.1
+Markdown>=3.2.1
+coreapi>=2.3.3
+PyYAML>=5.3.1
