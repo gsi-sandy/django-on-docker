@@ -34,6 +34,7 @@ ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 # Application definition
 
 INSTALLED_APPS = [
+    'api_rest_example1.apps.ApiRestExample1Config',
     'api.apps.ApiConfig',
     'polls.apps.PollsConfig',
     'django.contrib.admin',
