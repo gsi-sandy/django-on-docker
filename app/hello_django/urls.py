@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from django.conf.urls import include, url
+
 urlpatterns = [
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
     path('api_rest/', include('api_rest_example1.urls')),
+    url(r'^search/', include('search_indexes.urls')),  # Search URLs
 ]

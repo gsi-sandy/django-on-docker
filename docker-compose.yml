@@ -32,8 +32,41 @@ services:
       hello_django:
         ipv4_address: 172.10.0.2
 
+  elastic_search:
+    image: blacktop/elasticsearch:7.8
+    container_name: django_elastic_search.local.com
+    environment:
+      - node.name=django_elastic_search.local.com
+      - cluster.name=django_elastic_search.local.com
+      # - discovery.type=multiple-node
+      # - discovery.seed_hosts=${APP_ELASTIC_SEARCH_02_DOMAIN}
+      # - cluster.initial_master_nodes=${APP_ELASTIC_SEARCH_01_DOMAIN},${APP_ELASTIC_SEARCH_02_DOMAIN}
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    ports:
+      - "9200:9200"
+    volumes:
+        - elastic_search01_volume:/usr/share/elasticsearch/data
+    networks:
+      hello_django:
+        ipv4_address: 172.10.0.4
+
+  kibana:
+    image: kibana:7.8.0
+    container_name: django_kibana.local.com
+    volumes:
+        - ./kibana.yml:/usr/share/kibana/config/kibana.yml
+    ports:
+      - "5601:5601"
+    networks:
+      hello_django:
+        ipv4_address: 172.10.0.5
+    depends_on:
+      - elastic_search
+
 volumes:
   postgres_data:
+  elastic_search01_volume:
 
 networks:
   hello_django:

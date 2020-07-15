@@ -34,6 +34,10 @@ ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 # Application definition
 
 INSTALLED_APPS = [
+    'books',  # Books application
+    'search_indexes',
+    'django_elasticsearch_dsl', # Django Elasticsearch integration
+    'django_elasticsearch_dsl_drf', # Django REST framework Elasticsearch integration (this package)
     'api_rest_example1.apps.ApiRestExample1Config',
     'api.apps.ApiConfig',
     'polls.apps.PollsConfig',
@@ -62,6 +66,8 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PARSER_CLASSES': (
         'rest_framework.parsers.JSONParser',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
@@ -69,6 +75,21 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSIONS_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100,
+    'ORDERING_PARAM': 'ordering',
+}
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'django_elastic_search.local.com:9200'
+    },
+}
+
+ELASTICSEARCH_INDEX_NAMES = {
+    'search_indexes.documents.book': 'book',
+    'search_indexes.documents.publisher': 'publisher',
 }
 
 ROOT_URLCONF = 'hello_django.urls'
