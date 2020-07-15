@@ -2,14 +2,20 @@
 ## https://github.com/elastic/kibana/blob/master/src/dev/build/tasks/os_packages/docker_generator/templates/kibana_yml.template.js
 #
 server.name: kibana
+server.basePath: ""
 server.host: 0.0.0.0
-elasticsearch.hosts: [ "http://django_elastic_search.local.com:9200" ]
-monitoring.ui.container.elasticsearch.enabled: true
+#server.ssl.enabled: true
+#server.ssl.key: /usr/share/kibana/config/elastic-stack-certificates.key.pem
+#server.ssl.certificate: /usr/share/kibana/config/elastic-stack-certificates.crt.pem
 
-## X-Pack security credentials
-#
-#elasticsearch.username: elastic
-#elasticsearch.password: changeme
+elasticsearch.hosts: [ "http://django_elastic_search.local.com:9200" ]
+
+#monitoring.ui.container.elasticsearch.enabled: true
+
+elasticsearch.username: kibana
+elasticsearch.password: kibana
+
+elasticsearch.ssl.verificationMode: none
 
 # Kibana is served by a back end server. This setting specifies the port to use.
 # server.port: 5601
@@ -74,7 +80,7 @@ monitoring.ui.container.elasticsearch.enabled: true
 # must be a positive integer.
 # elasticsearch.requestTimeout: 30000
 
-# List of Kibana client-side headers to send to Elasticsearch. To send no client-side
+# List of Kibana client-side headers to send to Elasticsearch. To send *no* client-side
 # headers, set this value to [] (an empty list).
 # elasticsearch.requestHeadersWhitelist: [ authorization ]
 
