@@ -5,8 +5,8 @@ from elasticsearch_dsl import analyzer
 from books.models import Book
 
 # Name of the Elasticsearch index
-# INDEX = Index(settings.ELASTICSEARCH_INDEX_NAMES[__name__])
-INDEX = Index('book')
+INDEX = Index(settings.ELASTICSEARCH_INDEX_NAMES[__name__])
+# INDEX = Index('book')
 
 # See Elasticsearch Indices API reference for available settings
 INDEX.settings(
