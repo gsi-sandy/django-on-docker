@@ -63,9 +63,29 @@ services:
     depends_on:
       - elastic_search
 
+  django-pgadmin:
+    container_name: django_pgadmin.local.com
+    image: dpage/pgadmin4
+    restart: always
+    links:
+      - db
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - pgadmin:/root/.pgadmin
+    depends_on:
+      - db
+    networks:
+      hello_django:
+        ipv4_address: 172.10.0.6
+
 volumes:
   postgres_data:
   elastic_search01_volume:
+  pgadmin:
 
 networks:
   hello_django:

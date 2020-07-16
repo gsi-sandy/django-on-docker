@@ -19,6 +19,7 @@ from django.urls import include, path
 from django.conf.urls import include, url
 
 urlpatterns = [
+    path('hospital/', include('hospital.urls')),
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
